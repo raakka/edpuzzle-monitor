@@ -37,7 +37,8 @@ setInterval(function(){
     let lolBigObj = JSON.parse(response.body);
 
     for (var i = 0, len = lolBigObj.teacherAssignments.length; i < len; ++i) {
-      current_assignments.push(JSON.stringify(lolBigObj.teacherAssignments[i]._id));
+      current_assignments.push(JSON.stringify(lolBigObj.teacherAssignments[i]._id)
+    +" *Due Date:* "+JSON.stringify(lolBigObj.teacherAssignments[i].preferences.dueDate));
     }
 
     let difference = current_assignments
@@ -52,12 +53,8 @@ setInterval(function(){
       "title": "New Edpuzzle",
       "fields": [
         {
-          "name": "Assignment Id:",
+          "name": "Assignment",
           "value": id
-        },
-        {
-          "name": "Due Date:",
-          "value": "null"
         }
       ],
       "footer": {
