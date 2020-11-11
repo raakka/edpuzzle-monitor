@@ -20,29 +20,6 @@ let current_assignments = [];
 let prev_assignments = [];
 let newassign = [];
 
-function arr_diff (a1, a2) {
-
-    var a = [], diff = [];
-
-    for (var i = 0; i < a1.length; i++) {
-        a[a1[i]] = true;
-    }
-
-    for (var i = 0; i < a2.length; i++) {
-        if (a[a2[i]]) {
-            delete a[a2[i]];
-        } else {
-            a[a2[i]] = true;
-        }
-    }
-
-    for (var k in a) {
-        diff.push(k);
-    }
-
-    return diff;
-}
-
 function post2webhook(jsonmsg) {
   whurls.forEach((whurl, i) => {
     fetch(whurl + "?wait=true",
@@ -60,12 +37,15 @@ setInterval(function(){
     let lolBigObj = JSON.parse(response.body);
 
     for (var i = 0, len = lolBigObj.teacherAssignments.length; i < len; ++i) {
-      current_assignments.push(JSON.stringify(lolBigObj.teacherAssignments[i]));
+      current_assignments.push(JSON.stringify(lolBigObj.teacherAssignments[i]._id));
     }
 
-    newassign = arr_diff(current_assignments, prev_assignments);
-    prev_assignments.concat(newassign);
-    newassign.forEach((id, i) => {
+    let difference = current_assignments
+                  .filter(x => !prev_assignments.includes(x))
+                  .concat(prev_assignments
+                  .filter(x => !current_assignments.includes(x)));
+    prev_assignments=prev_assignments.concat(difference);
+    difference.forEach((id, i) => {
       let msg = {
   "embeds": [
     {
@@ -89,7 +69,6 @@ setInterval(function(){
     post2webhook(msg);
     });
 
-
-    console.log(newassign);
-    newassign = [];
+    console.log(prev_assignments);
+    current_assignments=[];
   })}, 3000);
