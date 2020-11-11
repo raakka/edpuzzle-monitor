@@ -1,5 +1,6 @@
 var request = require('request');
 require('dotenv').config();
+const fetch = require('node-fetch');
 
 // I could not care less that this code is absolute garbage rn
 // I needed a quick fix, maybe clean this up later idk
@@ -48,7 +49,7 @@ function post2webhook(jsonmsg) {
     {"method":"POST",
     "headers": {"content-type": "application/json"},
     "body": JSON.stringify(jsonmsg)})
-    .then(a=>a.json()).then(console.log)
+    .then(console.log("sent webhook"))
   });
 }
 
@@ -59,7 +60,7 @@ setInterval(function(){
     let lolBigObj = JSON.parse(response.body);
 
     for (var i = 0, len = lolBigObj.teacherAssignments.length; i < len; ++i) {
-      current_assignments.push(lolBigObj.teacherAssignments[i].id);
+      current_assignments.push(JSON.stringify(lolBigObj.teacherAssignments[i]));
     }
 
     newassign = arr_diff(current_assignments, prev_assignments);
@@ -85,9 +86,10 @@ setInterval(function(){
     }
   ]
 }
-      post2webhook(msg);
+    post2webhook(msg);
     });
 
 
-    console.log("ping!");
-  })}, 15000);
+    console.log(newassign);
+    newassign = [];
+  })}, 3000);
