@@ -13,7 +13,7 @@ var options = {
 };
 
 let whurls = [];
-whurls = process.env.WEBHOOK;
+whurls.push(process.env.WEBHOOK);
 
 let current_assignments = [];
 let prev_assignments = [];
