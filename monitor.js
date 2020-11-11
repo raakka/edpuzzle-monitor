@@ -9,7 +9,9 @@ var options = {
   }
 };
 
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
+setInterval(function(){
+  request(options, function (error, response) {
+    if (error) throw new Error(error);
+    let lolBigObj = JSON.parse(response.body);
+    console.log("ping!");
+  })}, 15000);
