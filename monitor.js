@@ -66,6 +66,6 @@ setInterval(function(){
     post2webhook(msg);
     });
 
-    console.log(prev_assignments);
+    //console.log(prev_assignments);
     current_assignments=[];
   })}, 3000);
