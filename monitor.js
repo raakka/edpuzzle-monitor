@@ -17,7 +17,7 @@ whurls = process.env.WEBHOOK;
 
 let current_assignments = [];
 let prev_assignments = [];
-let new = [];
+let newassign = [];
 
 function arr_diff (a1, a2) {
 
@@ -62,9 +62,9 @@ setInterval(function(){
       current_assignments.push(lolBigObj.teacherAssignments[i].id);
     }
 
-    new = arr_diff(current_assignments, prev_assignments);
-    prev_assignments.concat(new);
-    new.forEach((id, i) => {
+    newassign = arr_diff(current_assignments, prev_assignments);
+    prev_assignments.concat(newassign);
+    newassign.forEach((id, i) => {
       let msg = {
   "embeds": [
     {
