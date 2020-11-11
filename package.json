@@ -1,0 +1,26 @@
+{
+  "name": "edpuzzle-monitor",
+  "version": "1.0.0",
+  "description": "noneya",
+  "main": "index.js",
+  "scripts": {
+    "start": "node monitor.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raakka/edpuzzle-monitor.git"
+  },
+  "author": "xvi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raakka/edpuzzle-monitor/issues"
+  },
+  "homepage": "https://github.com/raakka/edpuzzle-monitor#readme",
+  "devDependencies": {
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
